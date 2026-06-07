@@ -1,0 +1,17 @@
+# Angular
+Client/node_modules/
+Client/.angular/
+Client/dist/
+Client/.env
+
+# Backend (Node.js)
+Service/node_modules/
+Service/dist/
+Service/.env
+
+# Ogólne
+.DS_Store
+*.log
+.env
+.vscode/
+.idea/

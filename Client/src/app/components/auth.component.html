@@ -1,0 +1,24 @@
+<div class="page auth-page">
+  <h2>{{ mode === 'login' ? '🔐 Logowanie' : '📝 Rejestracja' }}</h2>
+
+  <div class="form-group">
+    <label>Nazwa użytkownika</label>
+    <input [(ngModel)]="username" placeholder="login" autocomplete="username" />
+  </div>
+  <div class="form-group">
+    <label>Hasło</label>
+    <input [(ngModel)]="password" type="password" placeholder="••••••" autocomplete="current-password" />
+  </div>
+
+  <button class="btn-primary" (click)="submit()" [disabled]="loading || !username || !password">
+    {{ loading ? 'Proszę czekać...' : (mode === 'login' ? 'Zaloguj' : 'Zarejestruj') }}
+  </button>
+
+  <div *ngIf="error"   class="error">{{ error }}</div>
+  <div *ngIf="success" class="success">{{ success }}</div>
+
+  <p class="toggle-link">
+    {{ mode === 'login' ? 'Nie masz konta?' : 'Masz już konto?' }}
+    <a (click)="toggle()">{{ mode === 'login' ? 'Zarejestruj się' : 'Zaloguj się' }}</a>
+  </p>
+</div>

@@ -1,0 +1,37 @@
+<div class="page">
+  <h2>✈ Dostępne loty</h2>
+
+  <div class="search-box">
+    <input [(ngModel)]="searchParams.origin"      placeholder="Skąd (np. Warszawa)" />
+    <input [(ngModel)]="searchParams.destination" placeholder="Dokąd (np. Londyn)" />
+    <input [(ngModel)]="searchParams.date"        type="date" />
+    <button (click)="search()" class="btn-primary">Szukaj</button>
+    <button (click)="reset()"  class="btn-secondary">Resetuj</button>
+  </div>
+
+  <div *ngIf="loading" class="info">Ładowanie lotów...</div>
+  <div *ngIf="error"   class="error">{{ error }}</div>
+
+  <div *ngIf="!loading && flights.length === 0 && !error" class="info">
+    Brak lotów spełniających kryteria.
+  </div>
+
+  <div class="flights-grid">
+    <div class="flight-card" *ngFor="let flight of flights">
+      <div class="route">
+        <span class="city">{{ flight.origin }}</span>
+        <span class="arrow">→</span>
+        <span class="city">{{ flight.destination }}</span>
+      </div>
+      <div class="details">
+        <span>✈ {{ flight.flight_number }}</span>
+        <span>🕐 {{ flight.departure_time | slice:0:16 }}</span>
+        <span>💺 Miejsc: {{ flight.seats_available }}</span>
+        <span class="price">{{ flight.price }} PLN</span>
+      </div>
+      <button class="btn-book" (click)="bookFlight(flight)">
+        {{ auth.isLoggedIn() ? 'Kup bilet' : 'Zaloguj się by kupić' }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="page">
+  <button class="btn-secondary" style="margin-bottom:1rem" (click)="router.navigate(['/flights'])">
+    ← Wróć do lotów
+  </button>
+
+  <div *ngIf="loadingFlight" class="info">Ładowanie lotu...</div>
+  <div *ngIf="error && !flight" class="error">{{ error }}</div>
+
+  <div *ngIf="flight && !bookingResult">
+    <h2>🎫 Kup bilet</h2>
+
+    <div class="flight-summary">
+      <strong>{{ flight.origin }} → {{ flight.destination }}</strong>
+      <span>✈ {{ flight.flight_number }}</span>
+      <span>🕐 {{ flight.departure_time | slice:0:16 }}</span>
+      <span>💺 Dostępne miejsca: {{ flight.seats_available }}</span>
+      <span class="price">{{ flight.price }} PLN / os.</span>
+    </div>
+
+    <div class="form-group">
+      <label>Imię i nazwisko pasażera</label>
+      <input [(ngModel)]="booking.passenger_name" placeholder="Jan Kowalski" />
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input [(ngModel)]="booking.passenger_email" type="email" placeholder="jan@example.com" />
+    </div>
+    <div class="form-group">
+      <label>Liczba miejsc</label>
+      <input [(ngModel)]="booking.seats" type="number" min="1" [max]="flight.seats_available" />
+    </div>
+
+    <div class="total">Łączna cena: <strong>{{ totalPrice }} PLN</strong></div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <button class="btn-primary" (click)="confirm()" [disabled]="loading">
+      {{ loading ? 'Przetwarzanie...' : 'Potwierdź zakup' }}
+    </button>
+  </div>
+
+  <div *ngIf="bookingResult" class="reservation-result">
+    <h2>✅ Rezerwacja potwierdzona!</h2>
+    <div class="reservation-card">
+      <p><strong>Numer rezerwacji:</strong> {{ bookingResult.reservation_number }}</p>
+      <p><strong>Pasażer:</strong> {{ bookingResult.passenger_name }}</p>
+      <p><strong>Lot:</strong> {{ bookingResult.flight.origin }} → {{ bookingResult.flight.destination }}</p>
+      <p><strong>Miejsca:</strong> {{ bookingResult.seats }}</p>
+      <p><strong>Łączna cena:</strong> {{ bookingResult.total_price }} PLN</p>
+    </div>
+    <button class="btn-pdf" style="margin-top:1rem" (click)="downloadTicket(bookingResult.reservation_number)">
+      📄 Pobierz bilet PDF
+    </button>
+    <button class="btn-secondary" style="margin-top:1rem; margin-left:0.5rem" (click)="router.navigate(['/flights'])">
+      Wróć do lotów
+    </button>
+  </div>
+</div>

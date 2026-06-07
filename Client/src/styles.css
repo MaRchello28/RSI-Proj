@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  color: #1a3a5c;
+}
+
+.page { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+.page h2 { margin-bottom: 1.2rem; font-size: 1.5rem; }
+
+.search-box {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  background: white; padding: 1rem; border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08); margin-bottom: 1.5rem;
+}
+.search-box input {
+  flex: 1; min-width: 160px; padding: 0.5rem 0.8rem;
+  border: 1px solid #c0d0e0; border-radius: 6px; font-size: 0.95rem;
+}
+
+.flights-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
+.flight-card {
+  background: white; border-radius: 12px; padding: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.route { display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; font-weight: 700; }
+.city { color: #1a3a5c; }
+.arrow { color: #4a9fd4; }
+.details { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.9rem; color: #555; }
+.price { font-size: 1.1rem; font-weight: 700; color: #1a7a3c; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+.form-group label { font-weight: 600; font-size: 0.9rem; }
+.form-group input {
+  padding: 0.55rem 0.8rem; border: 1px solid #c0d0e0;
+  border-radius: 6px; font-size: 0.95rem;
+}
+.total { font-size: 1.1rem; margin-bottom: 1rem; }
+
+.btn-primary, .btn-secondary, .btn-book, .btn-pdf {
+  padding: 0.55rem 1.2rem; border: none; border-radius: 7px;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: opacity .15s;
+}
+.btn-primary   { background: #1a3a5c; color: white; }
+.btn-secondary { background: #e0e8f0; color: #1a3a5c; }
+.btn-book      { background: #4a9fd4; color: white; margin-top: auto; }
+.btn-pdf       { background: #d44a4a; color: white; }
+.btn-primary:disabled, .btn-book:disabled { opacity: 0.6; cursor: not-allowed; }
+button:hover:not(:disabled) { opacity: 0.85; }
+
+.error   { color: #c0392b; background: #fdecea; padding: 0.6rem 1rem; border-radius: 6px; margin-top: 0.8rem; }
+.success { color: #1a7a3c; background: #eafaf1; padding: 0.6rem 1rem; border-radius: 6px; margin-top: 0.8rem; }
+.info    { color: #555; padding: 1rem; text-align: center; }
+
+.flight-summary {
+  background: #eaf1fb; border-radius: 8px; padding: 1rem;
+  display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+}
+.flight-summary strong { font-size: 1.1rem; }
+.reservation-result {
+  background: #eafaf1; border-radius: 8px; padding: 1rem; margin-top: 1.2rem;
+}
+.reservation-card {
+  background: white; border-radius: 10px; padding: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08); margin-top: 1rem;
+  display: flex; flex-direction: column; gap: 0.4rem;
+}
+.badge-ok     { background: #1a7a3c; color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; }
+.badge-cancel { background: #c0392b; color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; }
+
+.auth-page { max-width: 380px; background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+.toggle-link { margin-top: 1rem; font-size: 0.9rem; text-align: center; }
+.toggle-link a { color: #4a9fd4; cursor: pointer; text-decoration: underline; }

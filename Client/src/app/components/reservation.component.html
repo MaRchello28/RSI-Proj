@@ -1,0 +1,30 @@
+<div class="page">
+  <h2>🔍 Sprawdź rezerwację</h2>
+
+  <div class="search-box">
+    <input [(ngModel)]="checkNumber" placeholder="Numer rezerwacji (np. AB12CD34)" />
+    <button class="btn-primary" (click)="checkReservation()" [disabled]="loading || !checkNumber">
+      Sprawdź
+    </button>
+  </div>
+
+  <div *ngIf="error"   class="error">{{ error }}</div>
+  <div *ngIf="loading" class="info">Szukam...</div>
+
+  <div *ngIf="foundReservation" class="reservation-card">
+    <p><strong>Nr:</strong> {{ foundReservation.reservation_number }}</p>
+    <p><strong>Pasażer:</strong> {{ foundReservation.passenger_name }}</p>
+    <p><strong>Lot:</strong> {{ foundReservation.flight.origin }} → {{ foundReservation.flight.destination }}</p>
+    <p><strong>Odlot:</strong> {{ foundReservation.flight.departure_time | slice:0:16 }}</p>
+    <p><strong>Miejsca:</strong> {{ foundReservation.seats }}</p>
+    <p><strong>Cena:</strong> {{ foundReservation.total_price }} PLN</p>
+    <p><strong>Status:</strong>
+      <span [class]="foundReservation.status === 'confirmed' ? 'badge-ok' : 'badge-cancel'">
+        {{ foundReservation.status }}
+      </span>
+    </p>
+    <button class="btn-pdf" (click)="downloadTicket(foundReservation.reservation_number)">
+      📄 Pobierz bilet PDF
+    </button>
+  </div>
+</div>

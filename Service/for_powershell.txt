@@ -1,0 +1,12 @@
+netsh advfirewall firewall add rule name="Angular 4200" dir=in action=allow protocol=TCP localport=4200
+netsh advfirewall firewall add rule name="Flask 5001" dir=in action=allow protocol=TCP localport=5001
+
+netsh interface portproxy add v4tov4 listenport=4200 listenaddress=0.0.0.0 connectport=4200 connectaddress=172.23.136.62
+netsh interface portproxy add v4tov4 listenport=5001 listenaddress=0.0.0.0 connectport=5001 connectaddress=172.23.136.62
+
+
+Do monitora
+mitmproxy --mode reverse:http://172.23.136.62:5001 \
+  -p 8443 \
+  --certs *=~/RSI/RSI-Proj/Service/combined.pem \
+  --set ssl_insecure=true
